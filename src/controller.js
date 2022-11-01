@@ -2,8 +2,8 @@ const { parseQueryString } = require("./util");
 
 function mean(req, res, next) {
   try {
-    let nums = parseQueryString(req.query.nums);
-    let answer = nums.reduce((sum, num) => sum + num) / nums.length;
+    const nums = parseQueryString(req.query.nums);
+    const answer = nums.reduce((sum, num) => sum + num) / nums.length;
     return res.json({ operation: "mean", value: answer });
   } catch (err) {
     next(err);
@@ -12,9 +12,9 @@ function mean(req, res, next) {
 
 function median(req, res, next) {
   try {
-    let nums = parseQueryString(req.query.nums);
+    const nums = parseQueryString(req.query.nums);
     nums.sort((a, b) => a - b);
-    let midpoint = nums.length / 2;
+    const midpoint = nums.length / 2;
     let answer;
     if (nums.length % 2 === 0) {
       answer = (nums[midpoint] + nums[midpoint - 1]) / 2;
@@ -29,8 +29,8 @@ function median(req, res, next) {
 
 function mode(req, res, next) {
   try {
-    let nums = parseQueryString(req.query.nums);
-    let modeObj = {};
+    const nums = parseQueryString(req.query.nums);
+    const modeObj = {};
     let maxCount = 0;
     nums.forEach((num) => {
       modeObj[num] = (modeObj[num] || 0) + 1;
@@ -38,7 +38,7 @@ function mode(req, res, next) {
         maxCount = modeObj[num];
       }
     });
-    let modes = [];
+    const modes = [];
     for (let key in modeObj) {
       if (modeObj[key] === maxCount) {
         modes.push(key);
