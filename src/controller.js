@@ -50,7 +50,7 @@ function mode(req, res, next) {
     const modes = [];
     for (let key in modeObj) {
       if (modeObj[key] === maxCount) {
-        modes.push(key);
+        modes.push(parseFloat(key));
       }
     }
     return res.json({ operation: "mode", value: modes });
