@@ -1,9 +1,18 @@
 const { parseQueryString } = require("./util");
 
+function index(req, res, next) {
+  try {
+    res.send("Ready to perform mean, median, or mode!");
+  } catch (err) {
+    next(err);
+  }
+}
+
 function mean(req, res, next) {
   try {
     const nums = parseQueryString(req.query.nums);
-    const answer = nums.reduce((sum, num) => sum + num) / nums.length;
+    let answer = nums.reduce((sum, num) => sum + num) / nums.length;
+    answer = Math.round(answer * 100) / 100;
     return res.json({ operation: "mean", value: answer });
   } catch (err) {
     next(err);
@@ -44,10 +53,10 @@ function mode(req, res, next) {
         modes.push(key);
       }
     }
-    return res.json({ operation: "median", value: modes });
+    return res.json({ operation: "mode", value: modes });
   } catch (err) {
     next(err);
   }
 }
 
-module.exports = { mean, median, mode };
+module.exports = { index, mean, median, mode };

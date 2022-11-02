@@ -10,6 +10,7 @@ function parseQueryString(queryStr) {
     if (isNaN(currentNum)) {
       throw new statsError(`${num} is not a number.`, 400);
     }
+    return currentNum;
   });
 }
 

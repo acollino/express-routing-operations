@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { mean, median, mode } = require("./controller");
+const operationControl = require("./controller");
 
-router.get("/mean", mean);
+router.get("/", operationControl.index);
 
-router.get("/median", median);
+router.get("/mean", operationControl.mean);
 
-router.get("/mode", mode);
+router.get("/median", operationControl.median);
+
+router.get("/mode", operationControl.mode);
 
 module.exports = router;
